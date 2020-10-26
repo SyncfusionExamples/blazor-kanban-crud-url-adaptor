@@ -1,0 +1,15 @@
+﻿@page "/"
+
+@using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Kanban
+@using Blazor_Kanban_Crud_UrlAdaptor.Data
+<SfKanban ID="Kanban" TValue="Order" KeyField="ShipCity">
+    <SfDataManager Url="/api/Default" CrudUrl="/api/Default/Batch" Adaptor="Adaptors.UrlAdaptor"></SfDataManager>
+    <KanbanColumns>
+        <KanbanColumn HeaderText="Brazil" KeyField=@(new List<string>{"Brazil"}) AllowAdding=true></KanbanColumn>
+        <KanbanColumn HeaderText="Sweden" KeyField=@(new List<string>{"Sweden"})></KanbanColumn>
+        <KanbanColumn HeaderText="India" KeyField=@(new List<string>{"India"})></KanbanColumn>
+    </KanbanColumns>
+    <KanbanCardSettings HeaderField="EmployeeID" ContentField="ShipName"></KanbanCardSettings>
+</SfKanban>
