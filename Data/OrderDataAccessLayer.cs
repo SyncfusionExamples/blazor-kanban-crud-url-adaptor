@@ -67,11 +67,11 @@ namespace Blazor_Kanban_Crud_UrlAdaptor.Data
         }
 
         //To Delete the record of a particular Order    
-        public void DeleteOrder(Order data)
+        public void DeleteOrder(int data)
         {
             try
             {
-                db.Orders.Remove(db.Orders.Where(or => or.EmployeeID == data.EmployeeID).FirstOrDefault());
+                db.Orders.Remove(db.Orders.Where(or => or.EmployeeID == data).FirstOrDefault());
                 db.SaveChanges();
             }
             catch

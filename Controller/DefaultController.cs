@@ -29,8 +29,29 @@ namespace Blazor_Kanban_Crud_UrlAdaptor.Controllers
         }
 
         [HttpPost]
+        [Route("api/Default/Add")]
+        public void Add([FromBody] CRUDModel<Order> value)
+        {
+            db.AddOrder(value.Value);        
+        }
+
+        [HttpPost]
+        [Route("api/Default/Update")]
+        public void Update([FromBody] CRUDModel<Order> value)
+        {
+             db.UpdateOrder(value.Value);
+        }
+
+        [HttpPost]
+        [Route("api/Default/Delete")]
+        public void Delete([FromBody] CRUDModel<Order> value)
+        {
+            db.DeleteOrder(Convert.ToInt32(Convert.ToString(value.Key)));
+        }
+
+        [HttpPost]
         [Route("api/Default/Batch")]
-        public void Batch([FromBody]CRUDModel<Order> value)
+        public void Batch([FromBody] CRUDModel<Order> value)
         {
             if (value.Changed.Count > 0)
             {
@@ -50,7 +71,7 @@ namespace Blazor_Kanban_Crud_UrlAdaptor.Controllers
             {
                 foreach (Order rec in value.Deleted)
                 {
-                    db.DeleteOrder(rec);
+                    db.DeleteOrder(rec.EmployeeID);
                 }
             }
         }
