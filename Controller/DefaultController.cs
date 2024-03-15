@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
-using Blazor_Kanban_Crud_UrlAdaptor.Data;
+using KanbanWithCRUDUrlAdaptor.Models;
 using Newtonsoft.Json;
 using Syncfusion.Blazor;
 using Syncfusion.Blazor.Data;
 using System.Collections;
 
-namespace Blazor_Kanban_Crud_UrlAdaptor.Controllers
+namespace KanbanWithCRUDUrlAdaptor.Controllers
 {
     [ApiController]
     public class DefaultController : ControllerBase
@@ -24,54 +24,55 @@ namespace Blazor_Kanban_Crud_UrlAdaptor.Controllers
         public object Post([FromBody] DataManagerRequest dm)
         {
             IEnumerable data = db.GetAllOrders();   //call the method to fetch data from db and return to client
-            int count = data.Cast<Order>().Count();
+            int count = data.Cast<OrderDetail>().Count();
             return dm.RequiresCounts ? new DataResult() { Result = data, Count = count } : (object)data;
         }
 
         [HttpPost]
         [Route("api/Default/Add")]
-        public void Add([FromBody] CRUDModel<Order> value)
+        public void Add([FromBody] CRUDModel<OrderDetail> value)
         {
+            value.Value.EmployeeId = db.GetAllOrders().Select(x => x.EmployeeId).Max() + 1;
             db.AddOrder(value.Value);        
         }
 
         [HttpPost]
         [Route("api/Default/Update")]
-        public void Update([FromBody] CRUDModel<Order> value)
+        public void Update([FromBody] CRUDModel<OrderDetail> value)
         {
              db.UpdateOrder(value.Value);
         }
 
         [HttpPost]
         [Route("api/Default/Delete")]
-        public void Delete([FromBody] CRUDModel<Order> value)
+        public void Delete([FromBody] CRUDModel<OrderDetail> value)
         {
             db.DeleteOrder(Convert.ToInt32(Convert.ToString(value.Key)));
         }
 
         [HttpPost]
         [Route("api/Default/Batch")]
-        public void Batch([FromBody] CRUDModel<Order> value)
+        public void Batch([FromBody] CRUDModel<OrderDetail> value)
         {
             if (value.Changed.Count > 0)
             {
-                foreach (Order rec in value.Changed)
+                foreach (OrderDetail rec in value.Changed)
                 {
                     db.UpdateOrder(rec);
                 }
             }
             if (value.Added.Count > 0)
             {
-                foreach (Order rec in value.Added)
+                foreach (OrderDetail rec in value.Added)
                 {
                     db.AddOrder(rec);
                 }
             }
             if (value.Deleted.Count > 0)
             {
-                foreach (Order rec in value.Deleted)
+                foreach (OrderDetail rec in value.Deleted)
                 {
-                    db.DeleteOrder(rec.EmployeeID);
+                    db.DeleteOrder(rec.EmployeeId);
                 }
             }
         }
