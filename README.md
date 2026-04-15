@@ -1,17 +1,37 @@
-# Blazor Kanban CRUD
+# Blazor Kanban — CRUD with URL Adaptor
 
-This is a project that covers CRUD operations of Blazor Kanban provided by Syncfusion. It achieved using URL adaptor of Blazor Data Manager.
+A sample Blazor application demonstrating CRUD operations for the Syncfusion Kanban component using the `UrlAdaptor` of the Blazor `DataManager` to communicate with backend endpoints.
 
-Online example: https://blazor.syncfusion.com/demos/kanban/dialog-editing?theme=bootstrap4
+## Overview
+
+This repository shows how to wire the Syncfusion Kanban component to a server API using the `UrlAdaptor` for create, read, update, and delete operations. The sample includes dialog editing and server-sync examples.
+
+**Online example**: https://blazor.syncfusion.com/demos/kanban/dialog-editing?theme=bootstrap4
+
+## Features
+
+- Server-backed CRUD via `UrlAdaptor`
+- Dialog-based card editing
+- Example workflows for create, read, update, delete
 
 ## Prerequisites
 
-* Visual Studio 2022
+- Visual Studio 2022 (recommended) or later
+- The .NET SDK required by the solution
 
-## How to run the project
+## Running the project
 
-* Checkout this project to a location in your disk.
-* Open the solution file using the Visual Studio 2022.
-* Restore the NuGet packages by rebuilding the solution.
-* Update the database connection to the project.
-* Run the project.
+1. Clone the repository to a local folder.
+2. Open the solution in Visual Studio 2022.
+3. Restore NuGet packages by rebuilding the solution or running `dotnet restore`.
+4. Configure the backend API endpoints or update the database connection string in the project configuration to match your environment.
+5. Build and run the project from Visual Studio.
+
+Optional CLI steps:
+
+```powershell
+dotnet restore
+dotnet build
+```
+
+If you want, I can add a sample connection string placeholder and brief notes about the API routes expected by the `UrlAdaptor`.
