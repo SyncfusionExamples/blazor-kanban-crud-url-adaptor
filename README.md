@@ -34,4 +34,6 @@ dotnet restore
 dotnet build
 ```
 
-If you want, I can add a sample connection string placeholder and brief notes about the API routes expected by the `UrlAdaptor`.
+## Troubleshooting & support
+
+If you encounter issues, confirm that packages are restored, the project builds, and the license key is registered correctly. For more details about Syncfusion components consult the Syncfusion Blazor documentation.
